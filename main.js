@@ -12,41 +12,11 @@ class LottoGenerator extends HTMLElement {
 
     shadow.appendChild(wrapper);
 
-    const style = document.createElement('style');
-    style.textContent = `
-      .lotto-numbers {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-      }
-      .lotto-number {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        background-color: #eee;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #333;
-      }
-      button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      button:hover {
-        background-color: #45a049;
-      }
-    `;
-    shadow.appendChild(style);
+    // Link to the main stylesheet to inherit CSS variables
+    const linkElem = document.createElement('link');
+    linkElem.setAttribute('rel', 'stylesheet');
+    linkElem.setAttribute('href', 'style.css');
+    shadow.appendChild(linkElem);
 
     this.generateNumbers();
 
@@ -74,3 +44,41 @@ class LottoGenerator extends HTMLElement {
 }
 
 customElements.define('lotto-generator', LottoGenerator);
+
+// Theme toggle logic
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Function to apply theme
+    function applyTheme(theme) {
+        body.classList.remove('dark-mode', 'light-mode'); // Remove both to ensure only one is applied
+        if (theme === 'dark-mode') {
+            body.classList.add('dark-mode');
+        }
+        // No need to add 'light-mode' class, as light mode is default styles
+    }
+
+    // Check for saved theme preference
+    let currentTheme = localStorage.getItem('theme');
+    if (!currentTheme) {
+        // If no preference, check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            currentTheme = 'dark-mode';
+        } else {
+            currentTheme = 'light-mode';
+        }
+    }
+    applyTheme(currentTheme);
+
+
+    themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            applyTheme('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+        } else {
+            applyTheme('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        }
+    });
+});

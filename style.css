@@ -1,21 +1,44 @@
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --component-bg: white;
+    --lotto-number-bg: #eee;
+    --button-bg: #4CAF50;
+    --button-hover-bg: #45a049;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    --bg-color: #333;
+    --text-color: #f0f0f0;
+    --component-bg: #444;
+    --lotto-number-bg: #555;
+    --button-bg: #66bb6a;
+    --button-hover-bg: #81c784;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
 
 body {
     font-family: sans-serif;
     display: flex;
+    flex-direction: column; /* Changed to column to accommodate the button */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 lotto-generator {
     display: block;
     padding: 2rem;
-    background-color: white;
+    background-color: var(--component-bg);
     border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px var(--shadow-color);
     text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .lotto-numbers {
@@ -29,17 +52,18 @@ lotto-generator {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: #eee;
+    background-color: var(--lotto-number-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: var(--button-bg);
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -47,8 +71,19 @@ button {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-bottom: 1rem; /* Added margin for spacing */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--button-hover-bg);
+}
+
+/* Style for the theme toggle button */
+#theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0;
 }
