@@ -65,10 +65,23 @@ lotto-generator {
 
 .lotto-numbers {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column; /* Changed to column to stack sets */
+    align-items: center;
+    gap: 1.5rem; /* Space between sets */
     margin-bottom: 2rem;
 }
+
+.lotto-set {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--number-background); /* Subtle border for each set */
+    border-radius: 0.5rem;
+    background-color: var(--card-background); /* Use card background for set */
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
 
 .lotto-number {
     width: 3rem;

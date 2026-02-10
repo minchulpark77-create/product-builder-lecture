@@ -27,18 +27,24 @@ class LottoGenerator extends HTMLElement {
 
   generateNumbers() {
     const numbersContainer = this.shadowRoot.querySelector('.lotto-numbers');
-    numbersContainer.innerHTML = '';
-    const numbers = new Set();
+    numbersContainer.innerHTML = ''; // Clear previous numbers
 
-    while (numbers.size < 6) {
-      numbers.add(Math.floor(Math.random() * 45) + 1);
-    }
+    for (let i = 0; i < 5; i++) { // Generate 5 sets of numbers
+      const lottoSet = document.createElement('div');
+      lottoSet.classList.add('lotto-set');
 
-    for (const number of [...numbers].sort((a, b) => a - b)) {
-      const numberElement = document.createElement('div');
-      numberElement.classList.add('lotto-number');
-      numberElement.textContent = number;
-      numbersContainer.appendChild(numberElement);
+      const numbers = new Set();
+      while (numbers.size < 6) {
+        numbers.add(Math.floor(Math.random() * 45) + 1);
+      }
+
+      for (const number of [...numbers].sort((a, b) => a - b)) {
+        const numberElement = document.createElement('div');
+        numberElement.classList.add('lotto-number');
+        numberElement.textContent = number;
+        lottoSet.appendChild(numberElement);
+      }
+      numbersContainer.appendChild(lottoSet);
     }
   }
 }
