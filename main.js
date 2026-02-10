@@ -7,7 +7,7 @@ class LottoGenerator extends HTMLElement {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `
       <div class="lotto-numbers"></div>
-      <button>Generate</button>
+      <button>생성</button>
     `;
 
     shadow.appendChild(wrapper);
