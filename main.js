@@ -52,33 +52,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to apply theme
     function applyTheme(theme) {
-        body.classList.remove('dark-mode', 'light-mode'); // Remove both to ensure only one is applied
-        if (theme === 'dark-mode') {
+        if (theme === 'dark') {
             body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
         }
-        // No need to add 'light-mode' class, as light mode is default styles
     }
 
-    // Check for saved theme preference
+    // Check for saved theme preference or system preference
     let currentTheme = localStorage.getItem('theme');
-    if (!currentTheme) {
+    if (currentTheme === null) {
         // If no preference, check system preference
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            currentTheme = 'dark-mode';
+            currentTheme = 'dark';
         } else {
-            currentTheme = 'light-mode';
+            currentTheme = 'light';
         }
     }
-    applyTheme(currentTheme);
 
+    // Apply initial theme
+    applyTheme(currentTheme);
 
     themeToggle.addEventListener('click', () => {
         if (body.classList.contains('dark-mode')) {
-            applyTheme('light-mode');
-            localStorage.setItem('theme', 'light-mode');
+            applyTheme('light');
         } else {
-            applyTheme('dark-mode');
-            localStorage.setItem('theme', 'dark-mode');
+            applyTheme('dark');
         }
     });
 });

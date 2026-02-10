@@ -1,44 +1,66 @@
+
 :root {
-    --bg-color: #f0f0f0;
+    --background-color: #f0f0f0;
     --text-color: #333;
-    --component-bg: white;
-    --lotto-number-bg: #eee;
-    --button-bg: #4CAF50;
-    --button-hover-bg: #45a049;
+    --card-background: white;
+    --button-background: #4CAF50;
+    --button-text-color: white;
+    --number-background: #eee;
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode {
-    --bg-color: #333;
+.dark-mode {
+    --background-color: #333;
     --text-color: #f0f0f0;
-    --component-bg: #444;
-    --lotto-number-bg: #555;
-    --button-bg: #66bb6a;
-    --button-hover-bg: #81c784;
+    --card-background: #444;
+    --button-background: #5cb85c;
+    --number-background: #555;
     --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
     font-family: sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
     display: flex;
-    flex-direction: column; /* Changed to column to accommodate the button */
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+#theme-toggle {
+    background-color: var(--button-background);
+    color: var(--button-text-color);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    transition: background-color 0.3s, color 0.3s;
+    min-height: 80vh;
 }
 
 lotto-generator {
     display: block;
     padding: 2rem;
-    background-color: var(--component-bg);
+    background-color: var(--card-background);
+    color: var(--text-color); /* Ensure text color is inherited */
     border-radius: 1rem;
     box-shadow: 0 10px 25px var(--shadow-color);
     text-align: center;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .lotto-numbers {
@@ -52,38 +74,26 @@ lotto-generator {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: var(--lotto-number-bg);
+    background-color: var(--number-background);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
 }
 
 button {
-    background-color: var(--button-bg);
-    color: white;
+    background-color: var(--button-background);
+    color: var(--button-text-color);
     padding: 1rem 2rem;
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-bottom: 1rem; /* Added margin for spacing */
 }
 
 button:hover {
-    background-color: var(--button-hover-bg);
-}
-
-/* Style for the theme toggle button */
-#theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    margin-bottom: 0;
+    opacity: 0.9;
 }
